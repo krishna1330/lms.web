@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@progress/kendo-react-inputs";
 import { Button } from "@progress/kendo-react-buttons";
@@ -16,16 +16,6 @@ const Auth = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [hover, setHover] = useState(false);
-  const [theme, setTheme] = useState("light");
-
-  // 🌗 Detect system theme
-  useEffect(() => {
-    const darkMode = window.matchMedia("(prefers-color-scheme: dark)");
-    const setSystemTheme = () => setTheme(darkMode.matches ? "dark" : "light");
-    setSystemTheme();
-    darkMode.addEventListener("change", setSystemTheme);
-    return () => darkMode.removeEventListener("change", setSystemTheme);
-  }, []);
 
   // ✅ Form validation
   const validate = () => {
@@ -53,31 +43,18 @@ const Auth = () => {
     setLoading(false);
   };
 
-  // 🎨 Updated balanced colors
-  const colors =
-    theme === "dark"
-      ? {
-          bg: "linear-gradient(135deg, #0f172a, #1e293b)",
-          card: "rgba(30, 41, 59, 0.6)",
-          text: "#e2e8f0",
-          inputBg: "#1e293b",
-          inputBorder: "#334155",
-          placeholder: "#94a3b8",
-          accent: "#60a5fa",
-          buttonGradient: "linear-gradient(90deg, #3b82f6, #2563eb)",
-          shadow: "rgba(0, 0, 0, 0.4) 0px 10px 25px",
-        }
-      : {
-          bg: "linear-gradient(135deg, #e3f2fd, #bbdefb)",
-          card: "rgba(255, 255, 255, 0.85)",
-          text: "#1e3a8a",
-          inputBg: "#ffffff",
-          inputBorder: "#ccc",
-          placeholder: "#777",
-          accent: "#1976d2",
-          buttonGradient: "linear-gradient(90deg, #1976d2, #42a5f5)",
-          shadow: "rgba(0, 0, 0, 0.1) 0px 10px 25px",
-        };
+  // 🎨 Light theme colors
+  const colors = {
+    bg: "linear-gradient(135deg, #e3f2fd, #bbdefb)",
+    card: "rgba(255, 255, 255, 0.9)",
+    text: "#1e3a8a",
+    inputBg: "#ffffff",
+    inputBorder: "#ccc",
+    placeholder: "#777",
+    accent: "#1976d2",
+    buttonGradient: "linear-gradient(90deg, #1976d2, #42a5f5)",
+    shadow: "rgba(0, 0, 0, 0.15) 0px 10px 25px",
+  };
 
   const styles = {
     page: {
@@ -88,7 +65,6 @@ const Auth = () => {
       justifyContent: "center",
       fontFamily: "'Segoe UI', sans-serif",
       transition: "background 0.4s ease",
-      position: "relative",
     },
     cardContainer: {
       width: "400px",
@@ -162,44 +138,10 @@ const Auth = () => {
       fontSize: "0.9rem",
       transition: "color 0.3s ease",
     },
-    toggle: {
-      position: "absolute",
-      top: "20px",
-      right: "25px",
-      width: "55px",
-      height: "28px",
-      borderRadius: "20px",
-      background:
-        theme === "dark"
-          ? "linear-gradient(90deg, #1e40af, #0f172a)"
-          : "linear-gradient(90deg, #bbdefb, #90caf9)",
-      boxShadow: "inset 0 2px 5px rgba(0,0,0,0.2)",
-      cursor: "pointer",
-      transition: "all 0.4s ease",
-      display: "flex",
-      alignItems: "center",
-      padding: "3px",
-    },
-    toggleCircle: {
-      width: "22px",
-      height: "22px",
-      borderRadius: "50%",
-      background: theme === "dark" ? "#fbbf24" : "#0f172a",
-      transform: theme === "dark" ? "translateX(27px)" : "translateX(0)",
-      transition: "all 0.4s ease",
-    },
   };
 
   return (
     <div style={styles.page}>
-      {/* 🌗 Theme Toggle */}
-      <div
-        style={styles.toggle}
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      >
-        <div style={styles.toggleCircle}></div>
-      </div>
-
       {/* 💎 Login Card */}
       <div style={styles.cardContainer}>
         <CardHeader>
