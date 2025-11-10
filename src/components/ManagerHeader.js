@@ -99,8 +99,21 @@ const ManagerHeader = () => {
                     <MenuItem
                         render={() => (
                             <div style={styles.profileSection}>
-                                <Avatar type="icon" shape="circle" size="medium">
-                                    <Icon name="user" />
+                                <Avatar
+                                    type="icon"
+                                    shape="circle"
+                                    size="medium"
+                                    style={{
+                                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                                        color: 'white',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontFamily: 'WebComponentsIcons',
+                                        fontSize: '22px',
+                                    }}
+                                >
+                                    {'\ue801'}
                                 </Avatar>
                                 <span>Manager</span>
                             </div>
