@@ -1,24 +1,35 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Auth from './pages/Auth';
-import ManagerDashboard from './pages/ManagerDashboard';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Auth from "./pages/Auth";
+import ManagerDashboard from "./pages/ManagerDashboard";
 
 const App = () => {
-  const isAuthenticated = !!localStorage.getItem('token');
+  const isAuthenticated = !!localStorage.getItem("token");
 
   return (
     <Router>
       <Routes>
-        {/* Login page */}
+        {/* Login Page */}
         <Route path="/login" element={<Auth />} />
 
-        {/* Protected Dashboard route */}
+        {/* Manager Dashboard (only if logged in) */}
         <Route
           path="/dashboard"
-          element={isAuthenticated ? <ManagerDashboard /> : <Navigate to="/login" replace />}
+          element={
+            isAuthenticated ? (
+              <ManagerDashboard />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
         />
 
-        {/* Default route */}
+        {/* Default Redirect */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
