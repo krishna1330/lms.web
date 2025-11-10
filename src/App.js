@@ -1,30 +1,19 @@
 import React from 'react';
-import { Button } from '@progress/kendo-react-buttons';
-import { Grid, GridColumn } from '@progress/kendo-react-grid';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import ManagerDashboard from './pages/ManagerDashboard';
 
-const employees = [
-  { id: 1, name: 'Murali', leaveType: 'Sick Leave', days: 2, status: 'Approved' },
-  { id: 2, name: 'Rahul', leaveType: 'Casual Leave', days: 1, status: 'Pending' },
-];
-
-function App() {
+const App = () => {
   return (
-    <div style={{ padding: '30px' }}>
-      <h2>Leave Management System</h2>
+    <Router>
+      <Routes>
+        {/* Default route shows Dashboard */}
+        <Route path="/" element={<ManagerDashboard />} />
 
-      <Button themeColor="primary" onClick={() => alert('Apply Leave clicked')}>
-        Apply Leave
-      </Button>
-
-      <Grid data={employees} style={{ marginTop: '20px' }}>
-        <GridColumn field="id" title="ID" width="50px" />
-        <GridColumn field="name" title="Employee Name" />
-        <GridColumn field="leaveType" title="Leave Type" />
-        <GridColumn field="days" title="Days" />
-        <GridColumn field="status" title="Status" />
-      </Grid>
-    </div>
+        {/* Redirect unknown URLs back to Dashboard */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
