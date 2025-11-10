@@ -31,7 +31,6 @@ const ManagerHeader = () => {
             position: 'sticky',
             top: 0,
             zIndex: 1000,
-            backgroundColor: '#1976d2',
             color: '#ffffff',
             padding: '0 30px',
             height: '50px',
@@ -73,7 +72,7 @@ const ManagerHeader = () => {
     };
 
     return (
-        <AppBar positionMode="sticky" style={styles.appBar}>
+        <AppBar positionMode="sticky" themeColor='primary' style={styles.appBar}>
             {/* Left section – Title */}
             <AppBarSection>
                 <h3 style={styles.appTitle}>Leave Management System</h3>
